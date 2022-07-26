@@ -22,14 +22,14 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="$YS_VCS_PROMPT_SUFFIX"
 ZSH_THEME_GIT_PROMPT_DIRTY="$YS_VCS_PROMPT_DIRTY"
 ZSH_THEME_GIT_PROMPT_CLEAN="$YS_VCS_PROMPT_CLEAN"
 
-local git_commit_msg = '$(git log --pretty=format:“%s” -1)'
+local git_last_commit='$(git log --pretty=format:"%h \"%s\"" -1 2> /dev/null)'
 
 # Prompt format: \n # DIRECTORY [GIT_BRANCH STATE GIT_SHA] [TIME] \n ➜
 PROMPT="
 %{$terminfo[bold]$fg[blue]%}#%{$reset_color%} \
 %{$terminfo[bold]$fg[yellow]%}${current_dir}%{$reset_color%}\
 ${git_info}\
-${git_sha}\
+${git_last_commit}]\
+-\
 %{$fg[white]%}[%*]
-%${ret_status}%{$reset_color%}\
-%${git_commit_msg}"
+%${ret_status}%{$reset_color%}"
